@@ -1,0 +1,26 @@
+[
+  {
+    "_id": {"$oid": "60a7a1c1c9e7c8b1c8d7a1d1"},
+    "projectId": {"$oid": "60a7a1c1c9e7c8b1c8d7a1c1"},
+    "name": "Task 1",
+    "description": "This is the first task",
+    "status": "ToDo",
+    "assignee": "John Doe",
+    "startDate": {"$date": "2023-06-05T00:00:00.000Z"},
+    "endDate": {"$date": "2023-06-10T00:00:00.000Z"},
+    "createdAt": {"$date": "2023-06-01T11:00:00.000Z"},
+    "updatedAt": {"$date": "2023-06-01T11:00:00.000Z"}
+  },
+  {
+    "_id": {"$oid": "60a7a1c1c9e7c8b1c8d7a1d2"},
+    "projectId": {"$oid": "60a7a1c1c9e7c8b1c8d7a1c2"},
+    "name": "Task 2",
+    "description": "This is the second task",
+    "status": "In Progress",
+    "assignee": "Jane Smith",
+    "startDate": {"$date": "2023-07-01T00:00:00.000Z"},
+    "endDate": {"$date": "2023-07-05T00:00:00.000Z"},
+    "createdAt": {"$date": "2023-06-01T12:00:00.000Z"},
+    "updatedAt": {"$date": "2023-06-01T12:00:00.000Z"}
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "_id": { "$oid": "60a7a1c1c9e7c8b1c8d7a1e1" },
+    "name": "John Doe",
+    "email": "john@example.com",
+    "password": "$2b$10$1234567890abcdef1234567890abcdef1234567890abcdef1234567890",
+    "role": "admin",
+    "createdAt": { "$date": "2023-06-01T13:00:00.000Z" },
+    "updatedAt": { "$date": "2023-06-01T13:00:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "60a7a1c1c9e7c8b1c8d7a1e2" },
+    "name": "Jane Smith",
+    "email": "jane@example.com",
+    "password": "$2b$10$0987654321fedcba0987654321fedcba0987654321fedcba0987654321",
+    "role": "user",
+    "createdAt": { "$date": "2023-06-01T14:00:00.000Z" },
+    "updatedAt": { "$date": "2023-06-01T14:00:00.000Z" }
+  }
+]
