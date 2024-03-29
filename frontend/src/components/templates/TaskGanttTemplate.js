@@ -1,9 +1,7 @@
+// frontend/src/components/templates/TaskGanttTemplate.js
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Container, Typography } from "@mui/material";
-import TaskGanttChart from "../organisms/TaskGanttChart";
 import { fetchTasks } from "../../store/actions/taskActions";
-import { fetchProjects } from "../../store/actions/projectActions";
 import GanttChart from "../organisms/GanttChart";
 
 const TaskGanttTemplate = () => {
@@ -13,7 +11,7 @@ const TaskGanttTemplate = () => {
   useEffect(() => {
     dispatch(fetchTasks());
     // dispatch(fetchProjects());
-  }, [dispatch]);
+  }, []);
 
   const formattedTasks = tasks.map((task) => ({
     ...task,
@@ -21,14 +19,12 @@ const TaskGanttTemplate = () => {
     endDate: new Date(task.endDate),
   }));
 
+  console.log("Formatted Tasks:", formattedTasks); // ここを追加
+
   return (
-    <Container>
-      <Typography variant="h4" component="h1" gutterBottom>
-        Task Gantt Chart
-      </Typography>
-      {/* <TaskGanttChart /> */}
+    <div>
       <GanttChart tasks={formattedTasks} />
-    </Container>
+    </div>
   );
 };
 

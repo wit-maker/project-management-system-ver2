@@ -1,10 +1,14 @@
 // frontend/src/components/organisms/GanttChart.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../styles/ganttChart/ganttChart.css";
 
 const GanttChart = ({ tasks }) => {
   const [selectedTask, setSelectedTask] = useState(null);
   const [draggedTask, setDraggedTask] = useState(null);
+
+  useEffect(() => {
+    console.log("Received Tasks:", tasks);
+  }, [tasks]);
 
   const handleTaskClick = (task) => {
     setSelectedTask(task);
@@ -64,8 +68,14 @@ const GanttChart = ({ tasks }) => {
   };
 
   return (
-    <div>
-      <div className="gantt-chart">
+    <div className="gantt-chart">
+      <h2>Gantt Chart</h2>
+      {tasks.map((task) => (
+        <div key={task._id} className="gantt-task">
+          {task.name}
+        </div>
+      ))}
+      {/* <div className="gantt-chart">
         {tasks.map((task) => (
           <div
             key={task._id}
@@ -93,7 +103,7 @@ const GanttChart = ({ tasks }) => {
             />
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };
