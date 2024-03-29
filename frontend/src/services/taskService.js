@@ -4,6 +4,7 @@ const API_URL = "http://localhost:3000/api/tasks";
 
 export const getTasks = async () => {
   const response = await axios.get(API_URL);
+  console.log("taskService", response.data);
   return response.data;
 };
 
