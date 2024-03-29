@@ -1,0 +1,21 @@
+/* Frontend/src/styles/ganttChart/ganttChart.css */
+.gantt-chart {
+  /* ガントチャートのコンテナスタイル */
+}
+
+.gantt-task {
+  /* タスクバーのスタイル */
+}
+
+.gantt-task.selected {
+  /* 選択されたタスクバーのスタイル */
+}
+
+.gantt-task.dragging {
+  /* ドラッグ中のタスクバーのスタイル */
+}
+
+.progress-bar {
+  height: 5px;
+  border-radius: 2px;
+}
