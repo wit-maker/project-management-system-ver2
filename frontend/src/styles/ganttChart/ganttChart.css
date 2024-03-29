@@ -15,7 +15,9 @@
   /* ドラッグ中のタスクバーのスタイル */
 }
 
-.progress-bar {
-  height: 5px;
-  border-radius: 2px;
+.gantt-chart {
+  width: 100%;
+  height: 500px; /* 高さを適切な値に設定 */
+  background-color: #f0f0f0; /* 背景色を設定 */
+  overflow-x: auto; /* 横スクロールを有効化 */
 }

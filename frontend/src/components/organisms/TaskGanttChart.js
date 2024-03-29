@@ -28,8 +28,8 @@ const TaskGanttChart = () => {
       (task) =>
         task.startDate &&
         task.endDate &&
-        typeof task.startDate === "string" &&
-        typeof task.endDate === "string"
+        task.startDate instanceof Date && // string型ではなくDate型であることを確認
+        task.endDate instanceof Date // string型ではなくDate型であることを確認
     )
     .map((task) => {
       const project = projects.find(

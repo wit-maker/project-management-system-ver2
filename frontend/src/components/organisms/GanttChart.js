@@ -75,7 +75,7 @@ const GanttChart = ({ tasks }) => {
           {task.name}
         </div>
       ))}
-      {/* <div className="gantt-chart">
+      <div className="gantt-chart">
         {tasks.map((task) => (
           <div
             key={task._id}
@@ -103,7 +103,7 @@ const GanttChart = ({ tasks }) => {
             />
           </div>
         ))}
-      </div> */}
+      </div>
     </div>
   );
 };
