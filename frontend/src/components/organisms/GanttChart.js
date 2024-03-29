@@ -72,6 +72,17 @@ const GanttChart = ({ tasks }) => {
       <h2>Gantt Chart</h2>
       {tasks.map((task) => (
         <div key={task._id} className="gantt-task">
+          <div>{task.name}</div>
+          <div>{task.project}</div> {/* プロジェクト名を表示 */}
+          <div>{task.assignee}</div> {/* 担当者名を表示 */}
+          {/* 他の要素は省略 */}
+        </div>
+      ))}
+      {/* </div> */}
+      {/* <div className="gantt-chart"> */}
+      <h2>Gantt Chart</h2>
+      {tasks.map((task) => (
+        <div key={task._id} className="gantt-task">
           {task.name}
         </div>
       ))}
