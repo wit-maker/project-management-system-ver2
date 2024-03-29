@@ -1,11 +1,16 @@
 const express = require("express");
 const router = express.Router();
 const Task = require("../models/task");
+const taskController = require("../controllers/taskController");
+
+router.post("/", taskController.createTask);
 
 // Get all tasks
 router.get("/", async (req, res) => {
   try {
-    const tasks = await Task.find().populate("projectId", "name");
+    const tasks = await Task.find()
+      .populate("projectId", "name")
+      .populate("assignee", "name");
     res.json(tasks);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -19,14 +24,28 @@ router.get("/:id", getTask, (req, res) => {
 
 // Create a task
 router.post("/", async (req, res) => {
+  const {
+    projectId,
+    name,
+    description,
+    status,
+    assignee,
+    startDate,
+    endDate,
+    dependencies,
+    estimatedDuration,
+  } = req.body;
+
   const task = new Task({
-    projectId: req.body.projectId,
-    name: req.body.name,
-    description: req.body.description,
-    status: req.body.status,
-    assignee: req.body.assignee,
-    startDate: req.body.startDate,
-    endDate: req.body.endDate,
+    projectId,
+    name,
+    description,
+    status,
+    assignee,
+    startDate,
+    endDate,
+    dependencies,
+    estimatedDuration,
   });
 
   try {
@@ -60,6 +79,15 @@ router.patch("/:id", getTask, async (req, res) => {
   if (req.body.endDate != null) {
     res.task.endDate = req.body.endDate;
   }
+  if (req.body.dependencies != null) {
+    res.task.dependencies = req.body.dependencies;
+  }
+  if (req.body.estimatedDuration != null) {
+    res.task.estimatedDuration = req.body.estimatedDuration;
+  }
+  if (req.body.actualDuration != null) {
+    res.task.actualDuration = req.body.actualDuration;
+  }
 
   try {
     const updatedTask = await res.task.save();
@@ -83,7 +111,9 @@ router.delete("/:id", getTask, async (req, res) => {
 async function getTask(req, res, next) {
   let task;
   try {
-    task = await Task.findById(req.params.id).populate("projectId", "name");
+    task = await Task.findById(req.params.id)
+      .populate("projectId", "name")
+      .populate("assignee", "name");
     if (task == null) {
       return res.status(404).json({ message: "Task not found" });
     }

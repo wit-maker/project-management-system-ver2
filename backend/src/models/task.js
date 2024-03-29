@@ -14,9 +14,15 @@ const taskSchema = new mongoose.Schema(
       enum: ["ToDo", "In Progress", "Completed"],
       default: "ToDo",
     },
-    assignee: { type: String },
+    assignee: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
     startDate: { type: Date },
     endDate: { type: Date },
+    dependencies: [{ type: mongoose.Schema.Types.ObjectId, ref: "Task" }],
+    estimatedDuration: { type: Number },
+    actualDuration: { type: Number },
   },
   { timestamps: true }
 );

@@ -1,8 +1,10 @@
-const Task = require('../models/task');
+const Task = require("../models/task");
 
 exports.getAllTasks = async (req, res) => {
   try {
-    const tasks = await Task.find();
+    const tasks = await Task.find()
+      .populate("projectId", "name")
+      .populate("assignee", "name");
     res.json(tasks);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -11,9 +13,11 @@ exports.getAllTasks = async (req, res) => {
 
 exports.getTaskById = async (req, res) => {
   try {
-    const task = await Task.findById(req.params.id);
+    const task = await Task.findById(req.params.id)
+      .populate("projectId", "name")
+      .populate("assignee", "name");
     if (!task) {
-      return res.status(404).json({ message: 'Task not found' });
+      return res.status(404).json({ message: "Task not found" });
     }
     res.json(task);
   } catch (error) {
@@ -22,14 +26,29 @@ exports.getTaskById = async (req, res) => {
 };
 
 exports.createTask = async (req, res) => {
-  const { name, description, assignee, projectId } = req.body;
+  const {
+    projectId,
+    name,
+    description,
+    status,
+    assignee,
+    startDate,
+    endDate,
+    dependencies,
+    estimatedDuration,
+  } = req.body;
 
   try {
     const newTask = new Task({
+      projectId,
       name,
       description,
+      status,
       assignee,
-      projectId,
+      startDate,
+      endDate,
+      dependencies,
+      estimatedDuration,
     });
 
     await newTask.save();
@@ -40,17 +59,39 @@ exports.createTask = async (req, res) => {
 };
 
 exports.updateTask = async (req, res) => {
-  const { name, description, assignee, projectId } = req.body;
+  const {
+    name,
+    description,
+    assignee,
+    projectId,
+    status,
+    startDate,
+    endDate,
+    dependencies,
+    estimatedDuration,
+    actualDuration,
+  } = req.body;
 
   try {
     const updatedTask = await Task.findByIdAndUpdate(
       req.params.id,
-      { name, description, assignee, projectId },
+      {
+        name,
+        description,
+        assignee,
+        projectId,
+        status,
+        startDate,
+        endDate,
+        dependencies,
+        estimatedDuration,
+        actualDuration,
+      },
       { new: true }
     );
 
     if (!updatedTask) {
-      return res.status(404).json({ message: 'Task not found' });
+      return res.status(404).json({ message: "Task not found" });
     }
 
     res.json(updatedTask);
@@ -64,10 +105,10 @@ exports.deleteTask = async (req, res) => {
     const deletedTask = await Task.findByIdAndDelete(req.params.id);
 
     if (!deletedTask) {
-      return res.status(404).json({ message: 'Task not found' });
+      return res.status(404).json({ message: "Task not found" });
     }
 
-    res.json({ message: 'Task deleted successfully' });
+    res.json({ message: "Task deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
